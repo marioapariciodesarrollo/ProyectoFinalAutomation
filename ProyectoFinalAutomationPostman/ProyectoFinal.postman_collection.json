@@ -1,0 +1,712 @@
+{
+	"info": {
+		"_postman_id": "2ca160af-5079-4e4c-afee-a5848bd53720",
+		"name": "ProyectoFinal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37150638",
+		"_collection_link": "https://postmanyoutube-4891.postman.co/workspace/Team-Workspace~a329fd96-074c-40e4-81b7-f0ddcffec417/collection/37150638-2ca160af-5079-4e4c-afee-a5848bd53720?action=share&source=collection_link&creator=37150638"
+	},
+	"item": [
+		{
+			"name": "Bookstore API",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"TestUser2024maparicio\",\r\n  \"password\": \"TestPassword@2024maparicio\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/Account/v1/User",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"Account",
+								"v1",
+								"User"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://bookstore.toolsqa.com/Account/v1/User' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"var varToken = jsonData.token;\r",
+									"pm.collectionVariables.set(\"token\",varToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"TestUser2024maparicio\",\r\n  \"password\": \"TestPassword@2024maparicio\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/Account/v1/GenerateToken",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"Account",
+								"v1",
+								"GenerateToken"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://bookstore.toolsqa.com/Account/v1/GenerateToken' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Books API",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/BookStore/v1/Books",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"BookStore",
+								"v1",
+								"Books"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://bookstore.toolsqa.com/BookStore/v1/Books' \\\r\n  -H 'accept: application/json'"
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Book to User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"{{UserID}}\",\r\n  \"collectionOfIsbns\": [\r\n    {\r\n      \"isbn\": \"9781449325862\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/BookStore/v1/Books",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"BookStore",
+								"v1",
+								"Books"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://bookstore.toolsqa.com/BookStore/v1/Books' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"userId\": \"string\",\r\n  \"collectionOfIsbns\": [\r\n    {\r\n      \"isbn\": \"string\"\r\n    }\r\n  ]\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Books assigned to a User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRlc3RVc2VyMjAyMCIsInBhc3N3b3JkIjoiVGVzdFBhc3N3b3JkQDIwMjAiLCJpYXQiOjE3Mjc2NTEzMDl9.Hmg1x0gDduUMm7RWA5YQYhdlssk2cAE_obsJOlodOUo"
+							}
+						],
+						"url": {
+							"raw": "https://bookstore.toolsqa.com/Account/v1/User/{{UserID}}",
+							"protocol": "https",
+							"host": [
+								"bookstore",
+								"toolsqa",
+								"com"
+							],
+							"path": [
+								"Account",
+								"v1",
+								"User",
+								"{{UserID}}"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://bookstore.toolsqa.com/Account/v1/User/{UUID}' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRlc3RVc2VyMjAyMCIsInBhc3N3b3JkIjoiVGVzdFBhc3N3b3JkQDIwMjAiLCJpYXQiOjE3Mjc2NTEzMDl9.Hmg1x0gDduUMm7RWA5YQYhdlssk2cAE_obsJOlodOUo'"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete books assigned to user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRlc3RVc2VyMjAyMCIsInBhc3N3b3JkIjoiVGVzdFBhc3N3b3JkQDIwMjAiLCJpYXQiOjE3Mjc2NTEzMDl9.Hmg1x0gDduUMm7RWA5YQYhdlssk2cAE_obsJOlodOUo"
+							}
+						],
+						"url": {
+							"raw": "https://bookstore.toolsqa.com/BookStore/v1/Books?UserId=2aaa6873-5b22-4441-9963-3c95cad8a3c3",
+							"protocol": "https",
+							"host": [
+								"bookstore",
+								"toolsqa",
+								"com"
+							],
+							"path": [
+								"BookStore",
+								"v1",
+								"Books"
+							],
+							"query": [
+								{
+									"key": "UserId",
+									"value": "2aaa6873-5b22-4441-9963-3c95cad8a3c3"
+								}
+							]
+						},
+						"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://bookstore.toolsqa.com/BookStore/v1/Books?UserId=2aaa6873-5b22-4441-9963-3c95cad8a3c3' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRlc3RVc2VyMjAyMCIsInBhc3N3b3JkIjoiVGVzdFBhc3N3b3JkQDIwMjAiLCJpYXQiOjE3Mjc2NTEzMDl9.Hmg1x0gDduUMm7RWA5YQYhdlssk2cAE_obsJOlodOUo'"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete ISBN assigned to User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRlc3RVc2VyMjAyMCIsInBhc3N3b3JkIjoiVGVzdFBhc3N3b3JkQDIwMjAiLCJpYXQiOjE3Mjc2NTEzMDl9.Hmg1x0gDduUMm7RWA5YQYhdlssk2cAE_obsJOlodOUo"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"isbn\": \"9781593277574\",\r\n  \"userId\": \"{{UserID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bookstore.toolsqa.com/BookStore/v1/Book",
+							"protocol": "https",
+							"host": [
+								"bookstore",
+								"toolsqa",
+								"com"
+							],
+							"path": [
+								"BookStore",
+								"v1",
+								"Book"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://bookstore.toolsqa.com/BookStore/v1/Book' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRlc3RVc2VyMjAyMCIsInBhc3N3b3JkIjoiVGVzdFBhc3N3b3JkQDIwMjAiLCJpYXQiOjE3Mjc2NTEzMDl9.Hmg1x0gDduUMm7RWA5YQYhdlssk2cAE_obsJOlodOUo' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"isbn\": \"string\",\r\n  \"userId\": \"string\"\r\n}'"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Funcional",
+			"item": [
+				{
+					"name": "Create User - Random",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const baseUserName = \"TestUser2024maparicio\";\r",
+									"const timestamp = new Date().getTime(); \r",
+									"const uniqueUserName = `${baseUserName}${timestamp}`; \r",
+									"\r",
+									"pm.collectionVariables.set(\"UniqueUserName\", uniqueUserName);\r",
+									"\r",
+									"// Muestra el nombre de usuario generado en la consola\r",
+									"console.log(\"Generated userName:\", uniqueUserName);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 201\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(201);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has the required fields - userID, username, and books\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.userID).to.exist;\r",
+									"    pm.expect(responseData.username).to.exist;\r",
+									"    pm.expect(responseData.books).to.exist;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Books array is present and empty\", function () {\r",
+									"  const responseData = pm.response.json();  \r",
+									"  pm.expect(responseData).to.be.an('object');\r",
+									"  pm.expect(responseData.books).to.exist.and.to.be.an('array').that.is.empty;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response schema is valid\", function () {\r",
+									"  var schema = {\r",
+									"    type: \"object\",\r",
+									"    properties: {\r",
+									"      userID: { type: \"string\" },\r",
+									"      username: { type: \"string\" },\r",
+									"      books: { type: \"array\" }\r",
+									"    },\r",
+									"    required: [\"userID\", \"username\", \"books\"]\r",
+									"  };\r",
+									"\r",
+									"  pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"{{UniqueUserName}}\",\r\n  \"password\": \"TestPassword@2024maparicio\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/Account/v1/User",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"Account",
+								"v1",
+								"User"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://bookstore.toolsqa.com/Account/v1/User' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Create User - Existing User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 406\", function () {\r",
+									"  pm.response.to.have.status(406);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has the required fields - code and message\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData).to.have.property('code');\r",
+									"    pm.expect(responseData).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Verify JSON Response Values\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql('1204');\r",
+									"    pm.expect(jsonData.message).to.eql('User exists!');\r",
+									"    \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"TestUser2024maparicio\",\r\n  \"password\": \"TestPassword@2024maparicio\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/Account/v1/User",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"Account",
+								"v1",
+								"User"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://bookstore.toolsqa.com/Account/v1/User' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Create User - Bad Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 400\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has the required fields - code and message\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.code).to.exist;\r",
+									"    pm.expect(responseData.message).to.exist;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is an object with required fields and data types\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData).to.have.property('code').that.is.a('string');\r",
+									"    pm.expect(responseData).to.have.property('message').that.is.a('string');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify JSON Response Values\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql('1300');\r",
+									"    pm.expect(jsonData.message).to.eql(\"Passwords must have at least one non alphanumeric character, one digit ('0'-'9'), one uppercase ('A'-'Z'), one lowercase ('a'-'z'), one special character and Password must be eight characters or longer.\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bookstore.toolsqa.com/Account/v1/User",
+							"protocol": "https",
+							"host": [
+								"bookstore",
+								"toolsqa",
+								"com"
+							],
+							"path": [
+								"Account",
+								"v1",
+								"User"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://bookstore.toolsqa.com/Account/v1/User' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Create User - Incomplete Body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 400\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has the required fields - code and message\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.code).to.exist;\r",
+									"    pm.expect(responseData.message).to.exist;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Validate the response schema for the User endpoint\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.code).to.be.a('string');\r",
+									"    pm.expect(responseData.message).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify JSON Response Values\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql('1200');\r",
+									"    pm.expect(jsonData.message).to.eql('UserName and Password required.');\r",
+									"    \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"TestUser2020\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bookstore.toolsqa.com/Account/v1/User",
+							"protocol": "https",
+							"host": [
+								"bookstore",
+								"toolsqa",
+								"com"
+							],
+							"path": [
+								"Account",
+								"v1",
+								"User"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://bookstore.toolsqa.com/Account/v1/User' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\"\r\n}'"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "UserID",
+			"value": "2aaa6873-5b22-4441-9963-3c95cad8a3c3",
+			"type": "string"
+		},
+		{
+			"key": "URL",
+			"value": "https://bookstore.toolsqa.com",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "UniqueUserName",
+			"value": ""
+		}
+	]
+}
